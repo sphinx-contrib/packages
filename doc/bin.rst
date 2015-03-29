@@ -3,6 +3,6 @@ Installed binaries
 
 This information is provided by the directive::
 
-  .. bin::
+  .. packages:bin::
 
-TODO
+.. packages:bin::
