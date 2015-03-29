@@ -1,4 +1,8 @@
 Installed python2 packages
 ==========================
 
-.. python2::
+This information is provided by the directive::
+
+  .. python2::
+
+TODO

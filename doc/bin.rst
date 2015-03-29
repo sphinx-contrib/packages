@@ -1,4 +1,8 @@
 Installed binaries
 ==================
 
-.. bin::
+This information is provided by the directive::
+
+  .. bin::
+
+TODO

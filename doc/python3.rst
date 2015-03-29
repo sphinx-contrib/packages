@@ -1,4 +1,8 @@
 Installed python3 packages
 ==========================
 
-.. python3::
+This information is provided by the directive::
+
+  .. python3::
+
+TODO

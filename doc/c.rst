@@ -1,4 +1,8 @@
 Installed C libraries
 =====================
 
-.. c::
+This information is provided by the directive::
+
+  .. c::
+
+TODO

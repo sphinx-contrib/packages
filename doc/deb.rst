@@ -1,4 +1,8 @@
 Installed `.deb` packages
 =========================
 
-.. deb::
+This information is provided by the directive::
+
+  .. deb::
+
+TODO
