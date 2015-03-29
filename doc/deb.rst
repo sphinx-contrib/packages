@@ -1,4 +1,4 @@
-Installed debian packages
+Installed `.deb` packages
 =========================
 
 .. deb::

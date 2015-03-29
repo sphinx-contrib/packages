@@ -9,7 +9,7 @@ from docutils.parsers.rst.directives import flag, unchanged
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
 
-class TableDirective(Directive):
+class SimpleTable(Directive):
     has_content = False
     has_headers = False
 
@@ -54,7 +54,7 @@ class TableDirective(Directive):
         return [table]
 
 
-class PlatformDirective(TableDirective):
+class PlatformDirective(SimpleTable):
     has_headers = False
 
     @property
@@ -82,3 +82,21 @@ class PlatformDirective(TableDirective):
 
 def setup(app):
     app.add_directive('packages:platform', PlatformDirective)
+
+# * Get list of deb packages::
+# 
+#     dpkg-query --show --showformat='${db:Status-Status} ${binary:Package} ${Homepage} ${Section} ${Version} ${binary:Summary}\n'
+# 
+# * Get list of installed binaries:
+# 
+#   Iterate over executable files in path.
+# 
+# * Get list of installed C modules::
+# 
+#     /sbin/ldconfig -p
+# 
+# * Get list of installed python packages::
+# 
+#     import pkgutil
+#     pkgutil.iter_modules()
+# 
