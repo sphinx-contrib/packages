@@ -10,17 +10,11 @@ TODO
 
 .. warning::
 
-    TODO
+    TODO not official
 
-System information
-------------------
+.. warning::
 
-This information is provided by directive::
-
-  .. packages:platform::
-
-
-.. packages:platform::
+    TODO local build
 
 Installed tools
 ---------------
@@ -28,9 +22,15 @@ Installed tools
 .. toctree::
    :maxdepth: 2
 
+   platform
    python2
    python3
    bin
    c
    deb
 
+
+Download and install
+--------------------
+
+TODO
