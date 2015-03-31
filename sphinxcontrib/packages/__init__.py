@@ -1,7 +1,10 @@
 # TODO Licence etc.
 
+import collections
 import os
 import platform
+import re
+import subprocess
 
 from docutils import nodes
 from docutils.statemachine import StringList
@@ -106,14 +109,65 @@ class BinDirective(Directive):
             items.append(item)
         return [bullet_list(items)]
 
+def deepdict_factory(depth):
+    """TODO
+
+    >>> d = deepdict_factory(2)()
+    >>> type(d)
+    <class 'collections.defaultdict'>
+    >>> type(d[0])
+    <class 'collections.defaultdict'>
+    >>> type(d[0]["foo"])
+    <class 'list'>
+    """
+    if depth == 0:
+        return list
+    else:
+        def deep_dict():
+            return collections.defaultdict(deepdict_factory(depth - 1))
+        return deep_dict
+
+class CmdDirective(Directive):
+    regexp = ""
+    command = []
+    headers = {}
+
+    def filter_match(self, match):
+        return match
+
+    def run(self):
+        compiled_re = re.compile(self.regexp)
+        TODO
+
+class DebDirective(CmdDirective):
+
+    regexp = r'\t'.join([r'(P<{}>[^\t]*)'.format(key) for key in ['status', 'section', 'package', 'version', 'homepage', 'summary']])
+    command = [
+        "dpkg-query",
+        "--show",
+        "--showformat='${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n'",
+        ]
+    headers = collections.OrderedDict([
+            "package": "Name",
+            "version": "Version",
+            "summary": "Summary",
+            "homepage": "Home page",
+            ])
+    sections = ["section"]
+
+
+    def filter(self, match):
+        if match['status'] == "ii":
+            return match
+        else:
+            return None
+
+
 def setup(app):
     app.add_directive('packages:platform', PlatformDirective)
     app.add_directive('packages:bin', BinDirective)
+    app.add_directive('packages:deb', DebDirective)
 
-# * Get list of deb packages::
-# 
-#     dpkg-query --show --showformat='${db:Status-Status} ${binary:Package} ${Homepage} ${Section} ${Version} ${binary:Summary}\n'
-# 
 # * Get list of installed C modules::
 # 
 #     /sbin/ldconfig -p
