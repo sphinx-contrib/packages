@@ -4,6 +4,7 @@
 # Make a main() function
 # Make it work with both python2 and python3
 
+import types
 import pkgutil
 import sys
 import os
@@ -23,18 +24,25 @@ VERSION = [
         "__VERSION__",
         ]
 
+def get_version(module):
+    candidates = [getattr(module, attr) for attr in VERSION if hasattr(module, attr)]
+    while candidates:
+        first = candidates.pop()
+        if callable(first):
+            return str(first())
+        elif type(first) == types.ModuleType:
+            candidates.extend([
+                getattr(first, attr) for attr in VERSION if hasattr(first, attr)
+                ])
+        else:
+            return str(first)
+    return ""
+
 for __importer, name, __ignored in pkgutil.iter_modules():
+    if name.startswith("_"):
+        continue
     try:
         module = __import__(name)
-        version = None
-        for attr in VERSION:
-            if hasattr(module, attr):
-                version = getattr(module, attr)
-                if callable(version):
-                    version = version()
-        if version is None:
-            print(name)
-        else:
-            print(name, version)
+        print("{}\t{}".format(name, get_version(module)))
     except:
         pass
