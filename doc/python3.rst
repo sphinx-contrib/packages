@@ -5,4 +5,4 @@ This information is provided by the directive::
 
   .. python3::
 
-TODO
+.. packages:python3::

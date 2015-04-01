@@ -2,6 +2,7 @@
 
 import collections
 import os
+import pkg_resources
 import platform
 import re
 import subprocess
@@ -160,6 +161,7 @@ class CmdDirective(Directive):
             return TODO_RECURSIVE_LISTE_SORTED(deepdict)
 
     def run(self):
+        # TODO Catch error when command is not found
         process = subprocess.Popen(
                 self.command,
                 stdin=subprocess.DEVNULL,
@@ -200,18 +202,41 @@ class DebDirective(CmdDirective):
         else:
             return None
 
+class PyDirective(CmdDirective):
+
+    regexp = r'\t'.join([r'(?P<{}>[^\t]*)'.format(key) for key in ['package', 'version']])
+    headers = collections.OrderedDict([
+            ("package", "Package name"),
+            ("version", "Version"),
+            ])
+    python = ""
+
+    # TODO Sort packages and remove duplicates
+
+    @property
+    def command(self):
+        return [
+            self.python,
+            pkg_resources.resource_filename(
+                "sphinxcontrib.packages",
+                os.path.join("data", "bin", "list_modules.py"),
+                ),
+            ]
+
+class Py3Directive(PyDirective):
+    python = "python3"
+
+class Py2Directive(PyDirective):
+    python = "python2"
+
 
 def setup(app):
     app.add_directive('packages:platform', PlatformDirective)
     app.add_directive('packages:bin', BinDirective)
     app.add_directive('packages:deb', DebDirective)
+    app.add_directive('packages:python2', Py2Directive)
+    app.add_directive('packages:python3', Py3Directive)
 
 # * Get list of installed C modules::
 # 
 #     /sbin/ldconfig -p
-# 
-# * Get list of installed python packages::
-# 
-#     import pkgutil
-#     pkgutil.iter_modules()
-# 
