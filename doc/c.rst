@@ -5,4 +5,4 @@ This information is provided by the directive::
 
   .. c::
 
-TODO
+.. packages:c::

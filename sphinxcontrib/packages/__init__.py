@@ -148,6 +148,7 @@ class CmdDirective(Directive):
 
     def _render_deepdict(self, deepdict):
         if type(deepdict) == list:
+            # TODO Sort names and remove duplicates
             return simpletable(
                     len(self.headers),
                     [nodes.paragraph(text=value) for value in self.headers.values()],
@@ -211,8 +212,6 @@ class PyDirective(CmdDirective):
             ])
     python = ""
 
-    # TODO Sort packages and remove duplicates
-
     @property
     def command(self):
         return [
@@ -229,6 +228,13 @@ class Py3Directive(PyDirective):
 class Py2Directive(PyDirective):
     python = "python2"
 
+class CDirective(CmdDirective):
+    regexp = r'^ *(?P<library>[^ ]*) '
+    headers = collections.OrderedDict([
+            ("library", "Library"),
+            ])
+    command = ["/sbin/ldconfig", "-p"]
+
 
 def setup(app):
     app.add_directive('packages:platform', PlatformDirective)
@@ -236,7 +242,5 @@ def setup(app):
     app.add_directive('packages:deb', DebDirective)
     app.add_directive('packages:python2', Py2Directive)
     app.add_directive('packages:python3', Py3Directive)
+    app.add_directive('packages:c', CDirective)
 
-# * Get list of installed C modules::
-# 
-#     /sbin/ldconfig -p
