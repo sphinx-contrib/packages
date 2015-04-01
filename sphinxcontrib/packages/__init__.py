@@ -131,29 +131,67 @@ class CmdDirective(Directive):
     regexp = ""
     command = []
     headers = {}
+    sections = []
 
     def filter_match(self, match):
         return match
 
-    def run(self):
+    def _iter_match(self, output):
         compiled_re = re.compile(self.regexp)
-        TODO
+        for line in output:
+            match = compiled_re.match(line)
+            if match:
+                processed_match = self.filter_match(match.groupdict())
+                if processed_match is not None:
+                    yield processed_match
+
+    def _render_deepdict(self, deepdict):
+        if type(deepdict) == list:
+            return simpletable(
+                    len(self.headers),
+                    [nodes.paragraph(text=value) for value in self.headers.values()],
+                    [
+                        [nodes.paragraph(text=item[key]) for key in self.headers]
+                        for item
+                        in deepdict
+                        ]
+                    )
+        else:
+            return TODO_RECURSIVE_LISTE_SORTED(deepdict)
+
+    def run(self):
+        process = subprocess.Popen(
+                self.command,
+                stdin=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                universal_newlines=True,
+                )
+        deepdict = deepdict_factory(len(self.sections))()
+        for match in self._iter_match(process.stdout):
+            subdict = deepdict
+            for section in self.sections:
+                subdict = subdict[section]
+            subdict.append(match)
+        process.wait()
+
+        return [self._render_deepdict(deepdict)]
 
 class DebDirective(CmdDirective):
 
-    regexp = r'\t'.join([r'(P<{}>[^\t]*)'.format(key) for key in ['status', 'section', 'package', 'version', 'homepage', 'summary']])
+    regexp = r'\t'.join([r'(?P<{}>[^\t]*)'.format(key) for key in ['status', 'section', 'package', 'version', 'homepage', 'summary']])
     command = [
         "dpkg-query",
         "--show",
         "--showformat='${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n'",
         ]
     headers = collections.OrderedDict([
-            "package": "Name",
-            "version": "Version",
-            "summary": "Summary",
-            "homepage": "Home page",
+            ("package", "Package name"),
+            ("version", "Version"),
+            ("summary", "Summary"),
             ])
-    sections = ["section"]
+    #sections = ["section"] TODO
+    # TODO Make name a link to homepage
 
 
     def filter(self, match):
