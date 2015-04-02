@@ -140,7 +140,7 @@ class CmdDirective(Directive):
     def _iter_match(self, output):
         compiled_re = re.compile(self.regexp)
         for line in output:
-            match = compiled_re.match(line)
+            match = compiled_re.match(line.decode("utf8"))
             if match:
                 processed_match = self.filter_match(match.groupdict())
                 if processed_match is not None:
@@ -168,7 +168,6 @@ class CmdDirective(Directive):
                 stdin=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,
-                universal_newlines=True,
                 )
         deepdict = deepdict_factory(len(self.sections))()
         for match in self._iter_match(process.stdout):
