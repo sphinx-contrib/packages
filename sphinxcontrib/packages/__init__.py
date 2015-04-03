@@ -20,6 +20,12 @@ def node_or_str(text):
     else:
         return text
 
+def simple_compound(*items):
+    compound = nodes.compound()
+    for item in items:
+        compound.append(item)
+    return compound
+
 def simple_link(text, target):
     container = nodes.paragraph()
     reference = nodes.reference("", "", internal=False, refuri=target)
@@ -101,8 +107,7 @@ class BinDirective(Directive):
     def run(self):
         items = []
         for path, binaries in self.dirs():
-            item = nodes.compound()
-            item.append(nodes.literal(text=path))
+            item = simple_compound(nodes.literal(text=path))
             cells = []
             for binary in binaries:
                 cells.append([nodes.paragraph(text=binary)])
@@ -164,7 +169,14 @@ class CmdDirective(Directive):
                     [items[key] for key in sorted(items.keys())],
                     )
         else:
-            return TODO_RECURSIVE_LISTE_SORTED(deepdict)
+            return simple_bulletlist([
+                    simple_compound(
+                        nodes.paragraph(text=key),
+                        self._render_deepdict(deepdict[key])
+                        )
+                    for key
+                    in sorted(deepdict)
+                    ])
 
     def run(self):
         try:
@@ -178,10 +190,10 @@ class CmdDirective(Directive):
             for match in self._iter_match(process.stdout):
                 subdict = deepdict
                 for section in self.sections:
-                    subdict = subdict[section]
+                    subdict = subdict[match[section]]
                 subdict.append(match)
             process.wait()
-        except Exception as exception:
+        except FileNotFoundError as exception:
             error = nodes.error()
             error.append(nodes.paragraph(text=str(exception)))
             return [error]
@@ -202,7 +214,7 @@ class DebDirective(CmdDirective):
             ("summary", "Summary"),
             ])
     sortkey = "package"
-    #sections = ["section"] TODO
+    sections = ["section"]
 
     def filter(self, match):
         if match['status'] == "installed":
