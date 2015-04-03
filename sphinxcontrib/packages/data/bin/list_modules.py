@@ -1,19 +1,9 @@
 #!/usr/bin/env python
 
-# TODO
-# Make a main() function
-# Make it work with both python2 and python3
-
 import types
 import pkgutil
 import sys
 import os
-
-while True:
-    try:
-        sys.path.remove(os.getcwd())
-    except ValueError:
-        break
 
 VERSION = [
         "version",
@@ -38,11 +28,22 @@ def get_version(module):
             return str(first)
     return ""
 
-for __importer, name, __ignored in pkgutil.iter_modules():
-    if name.startswith("_"):
-        continue
-    try:
-        module = __import__(name)
-        print("{}\t{}\t{}".format(name, get_version(module), module.__file__))
-    except:
-        pass
+def module_list():
+    while True:
+        try:
+            sys.path.remove(os.getcwd())
+        except ValueError:
+            break
+
+    for __importer, name, __ignored in pkgutil.iter_modules():
+        if name.startswith("_"):
+            continue
+        try:
+            module = __import__(name)
+            yield name, get_version(module), module.__file__
+        except:
+            pass
+
+if __name__ == "__main__":
+    for name, version, path in module_list():
+        print("{}\t{}\t{}".format(name, version, path))
