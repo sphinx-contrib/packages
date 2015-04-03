@@ -12,6 +12,7 @@ from docutils.statemachine import StringList
 from docutils.parsers.rst.directives import flag, unchanged
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
+from docutils.parsers.rst import directives
 
 def node_or_str(text):
     if isinstance(text, str):
@@ -19,7 +20,15 @@ def node_or_str(text):
     else:
         return text
 
-def simpletable(ncolumns, headers, body):
+def simple_link(text, target):
+    container = nodes.paragraph()
+    reference = nodes.reference("", "", internal=False, refuri=target)
+    reference.append(nodes.paragraph(text=text))
+    container.append(reference)
+    return container
+
+
+def simple_table(ncolumns, headers, body):
     def _build_table_row(data):
         row = nodes.row()
         for cell in data:
@@ -49,7 +58,7 @@ def simpletable(ncolumns, headers, body):
 
     return table
 
-def bullet_list(items):
+def simple_bulletlist(items):
     return nodes.bullet_list("", *[nodes.list_item('', node_or_str(item)) for item in items])
 
 class PlatformDirective(Directive):
@@ -73,7 +82,7 @@ class PlatformDirective(Directive):
             yield [attr.replace("_", " ").capitalize(), " ".join([str(item) for item in getattr(platform, attr)()])]
 
     def run(self):
-        return [simpletable(
+        return [simple_table(
             2,
             [],
             self.body(),
@@ -98,7 +107,7 @@ class BinDirective(Directive):
             for binary in binaries:
                 cells.append([nodes.paragraph(text=binary)])
             if cells:
-                item.append(simpletable(
+                item.append(simple_table(
                     1,
                     [],
                     cells,
@@ -106,7 +115,7 @@ class BinDirective(Directive):
             else:
                 item.append(nodes.emphasis(text="empty"))
             items.append(item)
-        return [bullet_list(items)]
+        return [simple_bulletlist(items)]
 
 def deepdict_factory(depth):
     """TODO
@@ -132,7 +141,7 @@ class CmdDirective(Directive):
     headers = {}
     sections = []
 
-    def filter_match(self, match):
+    def filter(self, match):
         return match
 
     def _iter_match(self, output):
@@ -140,14 +149,14 @@ class CmdDirective(Directive):
         for line in output:
             match = compiled_re.match(line.decode("utf8"))
             if match:
-                processed_match = self.filter_match(match.groupdict())
+                processed_match = self.filter(match.groupdict())
                 if processed_match is not None:
                     yield processed_match
 
     def _render_deepdict(self, deepdict):
         if type(deepdict) == list:
             # TODO Sort names and remove duplicates
-            return simpletable(
+            return simple_table(
                     len(self.headers),
                     self.headers.values(),
                     [
@@ -183,7 +192,7 @@ class DebDirective(CmdDirective):
     command = [
         "dpkg-query",
         "--show",
-        "--showformat='${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n'",
+        "--showformat=${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n",
         ]
     headers = collections.OrderedDict([
             ("package", "Package name"),
@@ -191,11 +200,11 @@ class DebDirective(CmdDirective):
             ("summary", "Summary"),
             ])
     #sections = ["section"] TODO
-    # TODO Make name a link to homepage
-
 
     def filter(self, match):
-        if match['status'] == "ii":
+        if match['status'] == "installed":
+            if match['homepage']:
+                match['package'] = simple_link(text=match['package'], target=match['homepage'])
             return match
         else:
             return None
@@ -233,7 +242,6 @@ class CDirective(CmdDirective):
             ("library", "Library"),
             ])
     command = ["/sbin/ldconfig", "-p"]
-
 
 def setup(app):
     app.add_directive('packages:platform', PlatformDirective)
