@@ -167,20 +167,24 @@ class CmdDirective(Directive):
             return TODO_RECURSIVE_LISTE_SORTED(deepdict)
 
     def run(self):
-        # TODO Catch error when command is not found
-        process = subprocess.Popen(
-                self.command,
-                stdin=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                stdout=subprocess.PIPE,
-                )
-        deepdict = deepdict_factory(len(self.sections))()
-        for match in self._iter_match(process.stdout):
-            subdict = deepdict
-            for section in self.sections:
-                subdict = subdict[section]
-            subdict.append(match)
-        process.wait()
+        try:
+            process = subprocess.Popen(
+                    self.command,
+                    stdin=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    stdout=subprocess.PIPE,
+                    )
+            deepdict = deepdict_factory(len(self.sections))()
+            for match in self._iter_match(process.stdout):
+                subdict = deepdict
+                for section in self.sections:
+                    subdict = subdict[section]
+                subdict.append(match)
+            process.wait()
+        except Exception as exception:
+            error = nodes.error()
+            error.append(nodes.paragraph(text=str(exception)))
+            return [error]
 
         return [self._render_deepdict(deepdict)]
 
