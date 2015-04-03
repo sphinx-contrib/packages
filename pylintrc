@@ -1,0 +1,10 @@
+[REPORTS]
+output-format=colorized
+#include-ids=yes
+#reports=yes
+
+[VARIABLES]
+dummy-variables-rgx=_|dummy
+
+[MESSAGES CONTROL]
+disable=logging-format-interpolation
