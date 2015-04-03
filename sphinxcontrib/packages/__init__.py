@@ -1,16 +1,16 @@
 # Copyright Louis Paternault 2015
 #
 # This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
+# it under the terms of the GNU Affero General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# GNU Affero General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
+# You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 1
 
 """This is a sphinx extension providing some directives to show system information.
@@ -32,6 +32,8 @@ from docutils.parsers.rst.directives import flag, unchanged
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
 from docutils.parsers.rst import directives
+
+__version__ = "0.0.0"
 
 def node_or_str(text):
     """Return argument, converted to a node if necessary."""

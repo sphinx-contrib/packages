@@ -1,7 +1,7 @@
 Welcome to the `sphinxcontrib-packages` documentation
 =====================================================
 
-This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some commands to
+This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives to
 see what tools are available on the compiling machine. I wrote this because I was developping a sphinx extension calling system commands, and I wanted to be able to use is on `readthedocs <http://readthedocs.org>`__, but I did not know which tools were available there: the `official list of installed tools <https://docs.readthedocs.org/en/latest/builds.html#packages-installed-in-the-build-environment>`__ is pretty scarce…
 
 .. warning::
