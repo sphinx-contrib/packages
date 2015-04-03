@@ -147,7 +147,7 @@ class CmdDirective(Directive):
     def _iter_match(self, output):
         compiled_re = re.compile(self.regexp)
         for line in output:
-            match = compiled_re.match(line.decode("utf8"))
+            match = compiled_re.match(line.decode("utf8").strip())
             if match:
                 processed_match = self.filter(match.groupdict())
                 if processed_match is not None:
@@ -155,15 +155,13 @@ class CmdDirective(Directive):
 
     def _render_deepdict(self, deepdict):
         if type(deepdict) == list:
-            # TODO Sort names and remove duplicates
+            items = dict()
+            for item in deepdict:
+                items[item[self.sortkey]] = [item[key] for key in self.headers]
             return simple_table(
                     len(self.headers),
                     self.headers.values(),
-                    [
-                        [item[key] for key in self.headers]
-                        for item
-                        in deepdict
-                        ]
+                    [items[key] for key in sorted(items.keys())],
                     )
         else:
             return TODO_RECURSIVE_LISTE_SORTED(deepdict)
@@ -195,37 +193,44 @@ class DebDirective(CmdDirective):
         "--showformat=${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n",
         ]
     headers = collections.OrderedDict([
-            ("package", "Package name"),
+            ("package_node", "Package name"),
             ("version", "Version"),
             ("summary", "Summary"),
             ])
+    sortkey = "package"
     #sections = ["section"] TODO
 
     def filter(self, match):
         if match['status'] == "installed":
             if match['homepage']:
-                match['package'] = simple_link(text=match['package'], target=match['homepage'])
+                match['package_node'] = simple_link(text=match['package'], target=match['homepage'])
+            else:
+                match['package_node'] = match['package']
             return match
         else:
             return None
 
 class PyDirective(CmdDirective):
 
-    regexp = r'\t'.join([r'(?P<{}>[^\t]*)'.format(key) for key in ['package', 'version']])
+    regexp = r'\t'.join([r'(?P<{}>[^\t]*)'.format(key) for key in ['package', 'version', 'path']])
     headers = collections.OrderedDict([
             ("package", "Package name"),
             ("version", "Version"),
             ])
+    sortkey = "package"
     python = ""
 
-    # TODO Filter out subpackages of current directory.
+    def filter(self, match):
+        if match['path'].startswith(pkg_resources.resource_filename(__name__, "data")):
+            return None
+        return match
 
     @property
     def command(self):
         return [
             self.python,
             pkg_resources.resource_filename(
-                "sphinxcontrib.packages",
+                __name__,
                 os.path.join("data", "bin", "list_modules.py"),
                 ),
             ]
@@ -242,6 +247,7 @@ class CDirective(CmdDirective):
             ("library", "Library"),
             ])
     command = ["/sbin/ldconfig", "-p"]
+    sortkey = "library"
 
 def setup(app):
     app.add_directive('packages:platform', PlatformDirective)

@@ -47,5 +47,5 @@ setup(
             # TODO
         ],
         long_description=readme(),
-        zip_safe = True,
+        zip_safe = False,
 )

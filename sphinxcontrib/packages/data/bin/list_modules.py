@@ -43,6 +43,6 @@ for __importer, name, __ignored in pkgutil.iter_modules():
         continue
     try:
         module = __import__(name)
-        print("{}\t{}".format(name, get_version(module)))
+        print("{}\t{}\t{}".format(name, get_version(module), module.__file__))
     except:
         pass
