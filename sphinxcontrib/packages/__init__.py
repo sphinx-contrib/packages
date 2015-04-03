@@ -13,13 +13,19 @@ from docutils.parsers.rst.directives import flag, unchanged
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
 
+def node_or_str(text):
+    if isinstance(text, str):
+        return nodes.paragraph(text=text)
+    else:
+        return text
+
 def simpletable(ncolumns, headers, body):
     def _build_table_row(data):
         row = nodes.row()
         for cell in data:
             entry = nodes.entry()
             row += entry
-            entry.append(cell)
+            entry.append(node_or_str(cell))
         return row
 
     table = nodes.table()
@@ -44,7 +50,7 @@ def simpletable(ncolumns, headers, body):
     return table
 
 def bullet_list(items):
-    return nodes.bullet_list("", *[nodes.list_item('', item) for item in items])
+    return nodes.bullet_list("", *[nodes.list_item('', node_or_str(item)) for item in items])
 
 class PlatformDirective(Directive):
     has_content = False
@@ -58,21 +64,13 @@ class PlatformDirective(Directive):
                 "version",
                 "processor",
                 ]:
-            yield [
-                    nodes.paragraph(text=text)
-                    for text
-                    in [attr.replace("_", " ").capitalize(), str(getattr(platform, attr)())]
-                    ]
+            yield [attr.replace("_", " ").capitalize(), str(getattr(platform, attr)())]
 
         for attr in [
                 "architecture",
                 "linux_distribution",
                 ]:
-            yield [
-                    nodes.paragraph(text=text)
-                    for text
-                    in [attr.replace("_", " ").capitalize(), " ".join([str(item) for item in getattr(platform, attr)()])]
-                    ]
+            yield [attr.replace("_", " ").capitalize(), " ".join([str(item) for item in getattr(platform, attr)()])]
 
     def run(self):
         return [simpletable(
@@ -151,9 +149,9 @@ class CmdDirective(Directive):
             # TODO Sort names and remove duplicates
             return simpletable(
                     len(self.headers),
-                    [nodes.paragraph(text=value) for value in self.headers.values()],
+                    self.headers.values(),
                     [
-                        [nodes.paragraph(text=item[key]) for key in self.headers]
+                        [item[key] for key in self.headers]
                         for item
                         in deepdict
                         ]
@@ -210,6 +208,8 @@ class PyDirective(CmdDirective):
             ("version", "Version"),
             ])
     python = ""
+
+    # TODO Filter out subpackages of current directory.
 
     @property
     def command(self):
