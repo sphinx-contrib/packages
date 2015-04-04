@@ -62,7 +62,8 @@ def simple_table(ncolumns, headers, body):
     """Return a table node.
 
     :param int ncolumns: Number of columns.
-    :param list headers: Headers, as a list of nodes (or strings).
+    :param list headers: Headers, as a list of nodes (or strings), or ``None``,
+        if there is no headers.
     :param list body: Body, as a list of lists of nodes (or strings).
     """
     def _build_table_row(data):
@@ -84,8 +85,9 @@ def simple_table(ncolumns, headers, body):
     # HEAD
     thead = nodes.thead()
     tgroup += thead
-    for row in [headers]:
-        thead += _build_table_row(row)
+    if headers is not None:
+        for row in [headers]:
+            thead += _build_table_row(row)
 
     # BODY
     tbody = nodes.tbody()
@@ -200,8 +202,9 @@ class CmdDirective(Directive):
     headers = {}
     sections = []
     sortkey = None
+    show_headers = True
 
-    def section_names(self, name):
+    def section_names(self, name): # pylint: disable=no-self-use
         """Return the displayed name corresponding to section ``name``.
         """
         return name
@@ -235,9 +238,13 @@ class CmdDirective(Directive):
             items = dict()
             for item in deepdict:
                 items[item[self.sortkey]] = [item[key] for key in self.headers]
+            if self.show_headers:
+                headers = self.headers.values()
+            else:
+                headers = None
             return simple_table(
                 len(self.headers),
-                self.headers.values(),
+                headers,
                 [items[key] for key in sorted(items.keys())],
                 )
         else:
@@ -345,6 +352,7 @@ class CDirective(CmdDirective):
         ])
     command = ["/sbin/ldconfig", "-p"]
     sortkey = "library"
+    show_headers = False
 
 class LatexDirective(CmdDirective):
     """Display available LaTeX packages."""
@@ -357,6 +365,7 @@ class LatexDirective(CmdDirective):
         "class": "Classes",
         "package": "Packages",
         }.get
+    show_headers = False
 
     @staticmethod
     def _sty_or_cls(file):
