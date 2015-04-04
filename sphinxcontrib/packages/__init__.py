@@ -319,7 +319,7 @@ class PyDirective(CmdDirective):
     python = ""
 
     def filter(self, match):
-        if not match['path'].startswith(pkg_resources.resource_filename(__name__, "data")):
+        if os.path.splitext(match['path'])[0] != os.path.splitext(self.command[1])[0]:
             yield match
 
     @property

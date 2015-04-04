@@ -64,7 +64,7 @@ def module_list():
         try:
             module = __import__(name)
             yield name, get_version(module), module.__file__
-        except Exception as error: # pylint: disable=broad-except
+        except BaseException as error: # pylint: disable=broad-except
             LOGGER.warning("Error while importing {}: {}.".format(name, error))
 
 if __name__ == "__main__":
