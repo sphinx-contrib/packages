@@ -199,8 +199,12 @@ class CmdDirective(Directive):
     regexp = "(?P<line>.*)"
     headers = {}
     sections = []
-    section_names = lambda x: x
     sortkey = None
+
+    def section_names(self, name):
+        """Return the displayed name corresponding to section ``name``.
+        """
+        return name
 
     def filter(self, match): # pylint: disable=no-self-use
         """Perform some post-processing on matched lines, and iterate over result.
