@@ -24,6 +24,7 @@ If you want to see installed tools, the list is here. Else, se below for more in
    bin
    c
    deb
+   latex
 
 
 Download and install

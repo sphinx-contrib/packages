@@ -196,19 +196,21 @@ class CmdDirective(Directive):
     """Abstract directive that executes a command, and return its output as array(s).
     """
     command = []
-    regexp = ""
+    regexp = "(?P<line>.*)"
     headers = {}
     sections = []
     sortkey = None
 
     def filter(self, match): # pylint: disable=no-self-use
-        """Perform some post-processing on matched lines.
+        """Perform some post-processing on matched lines, and iterate over result.
 
-        Returns a list of matched lines (which can be empty to discard
-        argument).
+        Iterate over resulting objects. In particular, it can iterate zero
+        objects (to discard argument), or iterate over several objects (if
+        argument corresponds to several objects).
+
         This function is to be overloaded, if necessary, by subclasses.
         """
-        return [match]
+        yield match
 
     def _iter_match(self, output):
         """Iterator over matched lines of the output."""
@@ -292,8 +294,7 @@ class DebDirective(CmdDirective):
                 match['package_node'] = simple_link(text=match['package'], target=match['homepage'])
             else:
                 match['package_node'] = match['package']
-            return [match]
-        return []
+            yield match
 
 class PyDirective(CmdDirective):
     """Abstract class to display available python modules."""
@@ -307,9 +308,8 @@ class PyDirective(CmdDirective):
     python = ""
 
     def filter(self, match):
-        if match['path'].startswith(pkg_resources.resource_filename(__name__, "data")):
-            return []
-        return [match]
+        if not match['path'].startswith(pkg_resources.resource_filename(__name__, "data")):
+            yield match
 
     @property
     def command(self):
@@ -342,6 +342,34 @@ class CDirective(CmdDirective):
     command = ["/sbin/ldconfig", "-p"]
     sortkey = "library"
 
+class LatexDirective(CmdDirective):
+    """Display available LaTeX packages."""
+
+    command = ["kpsepath", "tex"]
+    sortkey = "package"
+    headers = {'package': 'Packaqe'}
+
+    @staticmethod
+    def _find(path):
+        """Iterator over .sty files in argument.
+
+        Argument is a string representing a (maybe non-existing) path.
+        """
+        for __root, __dirs, files in os.walk(path):
+            for file in files:
+                if file.endswith(".sty"):
+                    yield file
+
+    def filter(self, match):
+        for item in match['line'].split(':'):
+            if item.startswith("!!"):
+                item = item[2:]
+            yield from [
+                dict([('package', sty)])
+                for sty
+                in self._find(item)
+                ]
+
 def setup(app):
     """Register directives."""
     app.add_directive('packages:platform', PlatformDirective)
@@ -350,4 +378,5 @@ def setup(app):
     app.add_directive('packages:python2', Py2Directive)
     app.add_directive('packages:python3', Py3Directive)
     app.add_directive('packages:c', CDirective)
+    app.add_directive('packages:latex', LatexDirective)
 
