@@ -204,10 +204,11 @@ class CmdDirective(Directive):
     def filter(self, match): # pylint: disable=no-self-use
         """Perform some post-processing on matched lines.
 
-        - ``None`` can be returned to dismiss this line.
-        - This function is to be overloaded, if necessary, by subclasses.
+        Returns a list of matched lines (which can be empty to discard
+        argument).
+        This function is to be overloaded, if necessary, by subclasses.
         """
-        return match
+        return [match]
 
     def _iter_match(self, output):
         """Iterator over matched lines of the output."""
@@ -215,9 +216,7 @@ class CmdDirective(Directive):
         for line in output:
             match = compiled_re.match(line.decode("utf8").strip())
             if match:
-                processed_match = self.filter(match.groupdict())
-                if processed_match is not None:
-                    yield processed_match
+                yield from self.filter(match.groupdict())
 
     def _render_deepdict(self, deepdict):
         """Render a :class:`deepdict`.
@@ -293,9 +292,8 @@ class DebDirective(CmdDirective):
                 match['package_node'] = simple_link(text=match['package'], target=match['homepage'])
             else:
                 match['package_node'] = match['package']
-            return match
-        else:
-            return None
+            return [match]
+        return []
 
 class PyDirective(CmdDirective):
     """Abstract class to display available python modules."""
@@ -310,8 +308,8 @@ class PyDirective(CmdDirective):
 
     def filter(self, match):
         if match['path'].startswith(pkg_resources.resource_filename(__name__, "data")):
-            return None
-        return match
+            return []
+        return [match]
 
     @property
     def command(self):
