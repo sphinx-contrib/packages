@@ -285,7 +285,7 @@ class DebDirective(CmdDirective):
     command = [
         "dpkg-query",
         "--show",
-        "--showformat=${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n", # pylint: disable=line-too-long
+        "--showformat=${db:Status-Abbrev}\t${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n", # pylint: disable=line-too-long
         ]
     headers = collections.OrderedDict([
         ("package_node", "Package name"),
