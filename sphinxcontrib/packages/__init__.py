@@ -221,6 +221,8 @@ class CmdDirective(Directive):
         """Iterator over matched lines of the output."""
         compiled_re = re.compile(self.regexp)
         for line in output:
+            if isinstance(self, DebDirective):
+                print("LINE", line.decode("utf8").strip())
             match = compiled_re.match(line.decode("utf8").strip())
             if match:
                 yield from self.filter(match.groupdict())
@@ -294,6 +296,8 @@ class DebDirective(CmdDirective):
     sections = ["section"]
 
     def filter(self, match):
+        if isinstance(self, DebDirective):
+            print("FILTER", match, match['status'])
         if match['status'] == "installed":
             if match['homepage']:
                 match['package_node'] = simple_link(text=match['package'], target=match['homepage'])
