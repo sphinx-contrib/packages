@@ -199,6 +199,7 @@ class CmdDirective(Directive):
     regexp = "(?P<line>.*)"
     headers = {}
     sections = []
+    section_names = lambda x: x
     sortkey = None
 
     def filter(self, match): # pylint: disable=no-self-use
@@ -238,7 +239,7 @@ class CmdDirective(Directive):
         else:
             return simple_bulletlist([
                 simple_compound(
-                    nodes.paragraph(text=key),
+                    nodes.paragraph(text=self.section_names(key)),
                     self._render_deepdict(deepdict[key])
                     )
                 for key
@@ -347,17 +348,35 @@ class LatexDirective(CmdDirective):
 
     command = ["kpsepath", "tex"]
     sortkey = "package"
-    headers = {'package': 'Packaqe'}
+    headers = {'package': 'Package'}
+    sections = ["type"]
+    section_names = {
+        "class": "Classes",
+        "package": "Packages",
+        }.get
 
     @staticmethod
-    def _find(path):
-        """Iterator over .sty files in argument.
+    def _sty_or_cls(file):
+        """Check if argument is a package or a class.
+
+        Returns ``"package"`` or ``"class"`` if one of them, ``False``
+        otherwise.
+        """
+        if file.endswith(".sty"):
+            return "package"
+        elif file.endswith(".cls"):
+            return "class"
+        else:
+            return False
+
+    def _find(self, path):
+        """Iterator over .sty and .clsfiles in argument.
 
         Argument is a string representing a (maybe non-existing) path.
         """
         for __root, __dirs, files in os.walk(path):
             for file in files:
-                if file.endswith(".sty"):
+                if self._sty_or_cls(file):
                     yield file
 
     def filter(self, match):
@@ -365,8 +384,8 @@ class LatexDirective(CmdDirective):
             if item.startswith("!!"):
                 item = item[2:]
             yield from [
-                dict([('package', sty)])
-                for sty
+                dict([('package', file), ('type', self._sty_or_cls(file))])
+                for file
                 in self._find(item)
                 ]
 
