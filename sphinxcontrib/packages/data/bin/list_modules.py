@@ -26,7 +26,7 @@ import types
 LOGGER = logging.getLogger()
 LOGGER.addHandler(logging.StreamHandler())
 
-VERSION = [
+VERSION_NAMES = [
     "version",
     "Version",
     "VERSION",
@@ -37,14 +37,14 @@ VERSION = [
 
 def get_version(module):
     """Guess the version of argument, and returns it, as a string."""
-    candidates = [getattr(module, attr) for attr in VERSION if hasattr(module, attr)]
+    candidates = [getattr(module, attr) for attr in VERSION_NAMES if hasattr(module, attr)]
     while candidates:
         first = candidates.pop()
         if callable(first):
             return str(first())
         elif isinstance(first, types.ModuleType):
             candidates.extend([
-                getattr(first, attr) for attr in VERSION if hasattr(first, attr)
+                getattr(first, attr) for attr in VERSION_NAMES if hasattr(first, attr)
                 ])
         else:
             return str(first)
