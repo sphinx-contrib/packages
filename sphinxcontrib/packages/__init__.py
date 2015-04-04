@@ -221,8 +221,7 @@ class CmdDirective(Directive):
         """Iterator over matched lines of the output."""
         compiled_re = re.compile(self.regexp)
         for line in output:
-            if isinstance(self, DebDirective):
-                print("LINE", line.decode("utf8").strip())
+            print(line)
             match = compiled_re.match(line.decode("utf8").strip())
             if match:
                 yield from self.filter(match.groupdict())
@@ -277,15 +276,15 @@ class CmdDirective(Directive):
 class DebDirective(CmdDirective):
     """Display the list of installed debian packages"""
 
-    regexp = r'\t'.join([
+    regexp = 'ii *\t' + r'\t'.join([
         r'(?P<{}>[^\t]*)'.format(key)
         for key
-        in ['status', 'section', 'package', 'version', 'homepage', 'summary']
+        in ['section', 'package', 'version', 'homepage', 'summary']
         ])
     command = [
         "dpkg-query",
         "--show",
-        "--showformat=${db:Status-Abbrev}\t${db:Status-Status}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n", # pylint: disable=line-too-long
+        "--showformat=${db:Status-Abbrev}\t${Section}\t${binary:Package}\t${Version}\t${Homepage}\t${binary:Summary}\n", # pylint: disable=line-too-long
         ]
     headers = collections.OrderedDict([
         ("package_node", "Package name"),
@@ -296,14 +295,12 @@ class DebDirective(CmdDirective):
     sections = ["section"]
 
     def filter(self, match):
-        if isinstance(self, DebDirective):
-            print("FILTER", match, match['status'])
-        if match['status'] == "installed":
-            if match['homepage']:
-                match['package_node'] = simple_link(text=match['package'], target=match['homepage'])
-            else:
-                match['package_node'] = match['package']
-            yield match
+        print(match)
+        if match['homepage']:
+            match['package_node'] = simple_link(text=match['package'], target=match['homepage'])
+        else:
+            match['package_node'] = match['package']
+        yield match
 
 class PyDirective(CmdDirective):
     """Abstract class to display available python modules."""
