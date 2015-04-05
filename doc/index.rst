@@ -36,4 +36,4 @@ instructions.
 Usage
 -----
 
-Add ``sphinxcontrib-packages`` to the list of sphinx extensions in your config files, and use of the directives provided by this package.
+Add ``sphinxcontrib.packages`` to the list of sphinx extensions in your config files, and use of the directives provided by this package.
