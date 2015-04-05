@@ -1,0 +1,6 @@
+sphinxcontrib-packages (0.1.0)
+
+  * Initial release.
+  * Implements directives: packages:{platform,python2,python3,bin,c,deb,latex}
+
+ -- Louis: Sun, 05 Apr 2015 11:21:27 +0200

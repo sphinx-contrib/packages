@@ -30,7 +30,7 @@ def readme():
 
 setup(
         name='sphinxcontrib-packages',
-        version="0.0.0",
+        version="0.1.0",
         packages=find_packages(),
         setup_requires=["hgtools"],
         install_requires=[

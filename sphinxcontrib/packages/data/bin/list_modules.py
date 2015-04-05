@@ -26,6 +26,8 @@ import types
 LOGGER = logging.getLogger()
 LOGGER.addHandler(logging.StreamHandler())
 
+__version__ = "0.1.0"
+
 VERSION_NAMES = [
     "version",
     "Version",
