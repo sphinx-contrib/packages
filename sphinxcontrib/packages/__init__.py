@@ -134,6 +134,13 @@ class PlatformDirective(Directive):
             self.body(),
             )]
 
+def iter_paths():
+    """Iterate over existing paths."""
+    for string in os.getenv("PATH").split(":"):
+        path = os.path.expanduser(os.path.expandvars(string))
+        if os.path.exists(path) and os.path.isdir(path):
+            yield path
+
 class BinDirective(Directive):
     """Display the list of available binaries."""
 
@@ -144,9 +151,9 @@ class BinDirective(Directive):
         - `path` is a path of the ``PATH`` variable;
         - `binaries` is the list of binaries available in this path.
         """
-        for path in os.getenv("PATH").split(":"):
+        for path in iter_paths():
             binaries = []
-            for binary in sorted(os.listdir(os.path.expanduser(os.path.expandvars(path)))):
+            for binary in sorted(os.listdir(path)):
                 if (
                         os.path.isfile(os.path.join(path, binary))
                         and
