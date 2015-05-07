@@ -20,6 +20,8 @@ http://packages.readthedocs.org
 """
 
 import collections
+import glob
+import operator
 import os
 import pkg_resources
 import platform
@@ -101,6 +103,36 @@ def simple_bulletlist(items):
     """Return a bullet list nodes of arguments."""
     return nodes.bullet_list("", *[nodes.list_item('', node_or_str(item)) for item in items])
 
+def iter_paths():
+    """Iterate over existing paths."""
+    for string in os.getenv("PATH").split(":"):
+        path = os.path.expanduser(os.path.expandvars(string))
+        if os.path.exists(path) and os.path.isdir(path):
+            yield path
+
+def python_versions():
+    """Iterate over [binary, version] lists of available python executables."""
+    binaries = set()
+    for path in iter_paths():
+        for binary in glob.glob(os.path.join(path, "python*")):
+            binaries.add(binary)
+
+    pythonre = re.compile(r".*/python[.0123456789]*(|m|mu)$")
+    for binary in binaries:
+        if pythonre.match(binary):
+            try:
+                yield [
+                    nodes.literal(text=binary),
+                    subprocess.check_output(
+                        [binary, "--version"],
+                        stdin=subprocess.DEVNULL,
+                        stderr=subprocess.STDOUT,
+                        universal_newlines=True,
+                    ).strip(),
+                    ]
+            except subprocess.CalledProcessError:
+                continue
+
 class PlatformDirective(Directive):
     """Print platform information (processors, architecture, etc.)"""
     has_content = False
@@ -127,19 +159,24 @@ class PlatformDirective(Directive):
                 " ".join([str(item) for item in getattr(platform, attr)()]),
                 ]
 
+        yield [
+            "Python versions",
+            simple_table(
+                2,
+                ["Binary", "Version"],
+                sorted(
+                    python_versions(),
+                    key=operator.itemgetter(1),
+                    ),
+                )
+            ]
+
     def run(self):
         return [simple_table(
             2,
             [],
             self.body(),
             )]
-
-def iter_paths():
-    """Iterate over existing paths."""
-    for string in os.getenv("PATH").split(":"):
-        path = os.path.expanduser(os.path.expandvars(string))
-        if os.path.exists(path) and os.path.isdir(path):
-            yield path
 
 class BinDirective(Directive):
     """Display the list of available binaries."""
