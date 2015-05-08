@@ -19,6 +19,7 @@ If you want to see installed tools, the list is here. Else, se below for more in
    :maxdepth: 2
 
    platform
+   pyversions
    python2
    python3
    bin

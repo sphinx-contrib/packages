@@ -117,7 +117,7 @@ def python_versions():
         for binary in glob.glob(os.path.join(path, "python*")):
             binaries.add(binary)
 
-    pythonre = re.compile(r".*/python[.0123456789]*(|m|mu)$")
+    pythonre = re.compile(r".*/python[.0123456789]*$")
     for binary in binaries:
         if pythonre.match(binary):
             try:
@@ -159,22 +159,29 @@ class PlatformDirective(Directive):
                 " ".join([str(item) for item in getattr(platform, attr)()]),
                 ]
 
-        yield [
-            "Python versions",
-            simple_table(
-                2,
-                ["Binary", "Version"],
-                sorted(
-                    python_versions(),
-                    key=operator.itemgetter(1),
-                    ),
-                )
-            ]
-
     def run(self):
         return [simple_table(
             2,
             [],
+            self.body(),
+            )]
+
+class PythonVersionsDirective(Directive):
+    """Print list of available python versions"""
+    has_content = False
+
+    @staticmethod
+    def body():
+        """Iterator to the versions."""
+        return sorted(
+            python_versions(),
+            key=operator.itemgetter(1),
+            )
+
+    def run(self):
+        return [simple_table(
+            2,
+            ["Binary", "Version"],
             self.body(),
             )]
 
@@ -448,6 +455,7 @@ class LatexDirective(CmdDirective):
 def setup(app):
     """Register directives."""
     app.add_directive('packages:platform', PlatformDirective)
+    app.add_directive('packages:pyversions', PythonVersionsDirective)
     app.add_directive('packages:bin', BinDirective)
     app.add_directive('packages:deb', DebDirective)
     app.add_directive('packages:python2', Py2Directive)
