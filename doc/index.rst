@@ -16,12 +16,10 @@ Installed tools
 If you want to see installed tools, the list is here. Else, se below for more information about this package.
 
 .. toctree::
-   :maxdepth: 2
 
    platform
    pyversions
-   python2
-   python3
+   python
    bin
    c
    deb

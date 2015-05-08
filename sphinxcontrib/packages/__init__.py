@@ -367,7 +367,9 @@ class PyDirective(CmdDirective):
         ("version", "Version"),
         ])
     sortkey = "package"
-    python = ""
+    python = "python"
+
+    option_spec = {'bin':directives.unchanged}
 
     def filter(self, match):
         if os.path.splitext(match['path'])[0] != os.path.splitext(self.command[1])[0]:
@@ -376,8 +378,10 @@ class PyDirective(CmdDirective):
     @property
     def command(self):
         """Return the command to perform to list modules."""
+        if "bin" not in self.options:
+            self.options["bin"] = self.python
         return [
-            self.python,
+            self.options["bin"],
             pkg_resources.resource_filename(
                 __name__,
                 os.path.join("data", "bin", "list_modules.py"),
@@ -458,6 +462,7 @@ def setup(app):
     app.add_directive('packages:pyversions', PythonVersionsDirective)
     app.add_directive('packages:bin', BinDirective)
     app.add_directive('packages:deb', DebDirective)
+    app.add_directive('packages:python', PyDirective)
     app.add_directive('packages:python2', Py2Directive)
     app.add_directive('packages:python3', Py3Directive)
     app.add_directive('packages:c', CDirective)

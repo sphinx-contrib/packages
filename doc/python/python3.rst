@@ -5,7 +5,11 @@ This information is provided by the directive::
 
   .. packages:python3::
 
-It lists available python2 packgaes. Note that system packages may not be
-displayed if run in a `virtualenv`.
+which is a shortcut to::
+
+  .. packages:python::
+     :bin: python3
+
+It lists available python3 packgaes.
 
 .. packages:python3::
