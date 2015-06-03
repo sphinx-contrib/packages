@@ -37,7 +37,7 @@ def readme():
 setup(
         name='sphinxcontrib-packages',
         version="0.1.0",
-        packages=find_packages(),
+        packages=find_packages(exclude=["test*"]),
         setup_requires=["hgtools"],
         install_requires=[
             "sphinx",
@@ -48,7 +48,7 @@ setup(
         description='This packages contains the Packages sphinx extension, which provides directives to display packages installed on the host machine',
         url='http://git.framasoft.org/spalax/packages',
         license="GPLv3 or any later version",
-        test_suite="sphinxcontrib.packages.test.suite",
+        test_suite="test.suite",
         classifiers=[
             "Development Status :: 4 - Beta",
             "Framework :: Sphinx :: Extension",
