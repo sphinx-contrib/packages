@@ -26,7 +26,13 @@ def readme():
         os.getcwd(),
         __file__,
         ))
-    return codecs.open(os.path.join(directory, "README.rst"), "r", "utf8").read()
+    with codecs.open(
+        os.path.join(directory, "README.rst"),
+        encoding="utf8",
+        mode="r",
+        errors="replace",
+        ) as file:
+        return file.read()
 
 setup(
         name='sphinxcontrib-packages',
