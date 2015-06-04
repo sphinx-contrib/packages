@@ -27,7 +27,9 @@ def suite():
     """
     test_loader = unittest.defaultTestLoader
     return test_loader.discover(
-        os.path.abspath(os.path.join(sphinxcontrib.packages.__path__[0], ".."))
+        os.path.abspath(os.path.dirname(__file__)),
+        pattern="*.py",
+        top_level_dir=os.path.abspath(os.path.join(sphinxcontrib.packages.__path__[0], "..", "..")),
         )
 
 if __name__ == "__main__":
