@@ -11,6 +11,12 @@ know which tools were available there: the `official list of installed tools
 <https://docs.readthedocs.org/en/latest/builds.html#packages-installed-in-the-build-environment>`__
 is pretty scarce…
 
+What's new?
+-----------
+
+See `changelog
+<https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG>`_.
+
 Install
 -------
 

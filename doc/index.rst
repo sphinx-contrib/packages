@@ -29,8 +29,9 @@ If you want to see installed tools, the list is here. Else, se below for more in
 Download and install
 --------------------
 
-See the `main project page <http://git.framasoft.org/spalax/scal>`_ for
-instructions.
+See the `main project page <http://git.framasoft.org/spalax/sphinxcontrib-packages>`_ for
+instructions, and `changelog
+<https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG>`_.
 
 Usage
 -----
