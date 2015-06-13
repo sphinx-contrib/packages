@@ -35,7 +35,7 @@ from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
 from docutils.parsers.rst import directives
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 def node_or_str(text):
     """Return argument, converted to a node if necessary."""
