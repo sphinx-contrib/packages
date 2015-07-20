@@ -6,7 +6,7 @@ see what tools are available on the compiling machine. I wrote this because I wa
 
 .. warning::
 
-    If your are reading this on `readthedocs <http://readthedocs.org>`__, keep in mind that thoses lists are not official. It is not guaranteed that those tools will remain available in the future: they only reflects what was available when this documentation was compiled.
+    If your are reading this on `readthedocs <http://readthedocs.org>`__, keep in mind that those lists are not official. It is not guaranteed that those tools will remain available in the future: they only reflects what was available when this documentation was compiled.
 
     I do not know and I have nothing to do with `readthedocs <http://readthedocs.org>`__, so I do not know how they choose what to install.
 
