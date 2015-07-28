@@ -14,4 +14,4 @@
   * Initial release.
   * Implements directives: packages:{platform,python2,python3,bin,c,deb,latex}
 
- -- Louis Paternault <spalax@gresille.org>
+    -- Louis Paternault <spalax@gresille.org>
