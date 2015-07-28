@@ -7,7 +7,7 @@
   * Python3.5 support
   * Several minor improvement for documentation, tests and setup.
 
-  -- Louis Paternault <spalax@gresille.org>
+    -- Louis Paternault <spalax@gresille.org>
 
 * sphinxcontrib-packages 0.1.0 (2015-04-05)
 
