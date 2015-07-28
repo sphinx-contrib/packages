@@ -1,4 +1,4 @@
-sphinxcontrib-packages 0.1.1 (Sat Jun 13 21:47:54 CEST 2015)
+* sphinxcontrib-packages 0.1.1 (2015-06-13)
 
   * Closes #5: New directive ``pyversions`` to list available python versions.
   * Closes #6: New directives ``python`` to list available python packages
@@ -7,11 +7,11 @@ sphinxcontrib-packages 0.1.1 (Sat Jun 13 21:47:54 CEST 2015)
   * Python3.5 support
   * Several minor improvement for documentation, tests and setup.
 
-  -- Louis
+  -- Louis Paternault <spalax@gresille.org>
 
-sphinxcontrib-packages 0.1.0 (Sun, 05 Apr 2015 11:21:27 +0200)
+* sphinxcontrib-packages 0.1.0 (2015-04-05)
 
   * Initial release.
   * Implements directives: packages:{platform,python2,python3,bin,c,deb,latex}
 
- -- Louis
+ -- Louis Paternault <spalax@gresille.org>

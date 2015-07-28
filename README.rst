@@ -15,7 +15,7 @@ What's new?
 -----------
 
 See `changelog
-<https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG>`_.
+<https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG.md>`_.
 
 Install
 -------
