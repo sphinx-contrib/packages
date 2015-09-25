@@ -46,7 +46,7 @@ setup(
         author='Louis Paternault',
         author_email='spalax@gresille.org',
         description='This packages contains the Packages sphinx extension, which provides directives to display packages installed on the host machine',
-        url='http://git.framasoft.org/spalax/packages',
+        url='https://git.framasoft.org/spalax/sphinxcontrib-packages',
         license="GPLv3 or any later version",
         test_suite="test.suite",
         classifiers=[
