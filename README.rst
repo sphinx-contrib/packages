@@ -20,7 +20,7 @@ See `changelog
 Install
 -------
 
-This module is compatible with both python 2 and 3.
+This module is compatible with python 3 only.
 
 See the end of list for a (quick and dirty) Debian package.
 
