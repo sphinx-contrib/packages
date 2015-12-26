@@ -23,17 +23,18 @@ import collections
 import glob
 import operator
 import os
-import pkg_resources
 import platform
 import re
 import subprocess
 
+import pkg_resources
+
 from docutils import nodes
-from docutils.statemachine import StringList
+from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives import flag, unchanged
+from docutils.statemachine import StringList
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
-from docutils.parsers.rst import directives
 
 __version__ = "0.1.1"
 
