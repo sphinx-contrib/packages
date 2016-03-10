@@ -1,3 +1,10 @@
+* sphinxcontrib-packages 0.1.2 (2016-03-11)
+
+    * Fix project URL in setup file.
+    * Set status from beta to stable.
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * sphinxcontrib-packages 0.1.1 (2015-06-13)
 
     * Closes #5: New directive ``pyversions`` to list available python versions.

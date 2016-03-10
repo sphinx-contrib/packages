@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2015
+# Copyright Louis Paternault 2015-2016
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -36,7 +36,7 @@ from docutils.statemachine import StringList
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 def node_or_str(text):
     """Return argument, converted to a node if necessary."""

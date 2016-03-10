@@ -1,4 +1,4 @@
-# Copyright 2015 Louis Paternault
+# Copyright 2015-2016 Louis Paternault
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ def readme():
 
 setup(
         name='sphinxcontrib-packages',
-        version="0.1.1",
+        version="0.1.2",
         packages=find_packages(exclude=["test*"]),
         setup_requires=["hgtools"],
         install_requires=[
