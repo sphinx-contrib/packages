@@ -58,3 +58,5 @@ The documentation is available on `readthedocs
   :target: http://www.gnu.org/licenses/agpl-3.0.html
 .. |sources| image:: https://img.shields.io/badge/sources-sphinxcontrib--packages-brightgreen.svg
   :target: http://git.framasoft.org/spalax/sphinxcontrib-packages
+.. |build| image:: https://git.framasoft.org/ci/projects/86/status.png?ref=master
+  :target: https://git.framasoft.org/ci/projects/86?ref=master
