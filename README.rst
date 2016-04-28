@@ -6,9 +6,9 @@ Description of the `sphinxcontrib-packages` Sphinx Extension
 This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives
 to see what tools are available on the compiling machine. I wrote this because
 I was developping a sphinx extension calling system commands, and I wanted to
-be able to use is on `readthedocs <http://readthedocs.org>`__, but I did not
+be able to use is on `readthedocs <http://readthedocs.io>`__, but I did not
 know which tools were available there: the `official list of installed tools
-<https://docs.readthedocs.org/en/latest/builds.html#packages-installed-in-the-build-environment>`__
+<https://docs.readthedocs.io/en/latest/builds.html#packages-installed-in-the-build-environment>`__
 is pretty scarce…
 
 What's new?
@@ -46,12 +46,12 @@ Documentation
 -------------
 
 The documentation is available on `readthedocs
-<http://packages.readthedocs.org>`_.  You can build it using::
+<http://packages.readthedocs.io>`_.  You can build it using::
 
   cd doc && make html
 
-.. |documentation| image:: http://readthedocs.org/projects/packages/badge
-  :target: http://packages.readthedocs.org
+.. |documentation| image:: http://readthedocs.io/projects/packages/badge
+  :target: http://packages.readthedocs.io
 .. |pypi| image:: https://img.shields.io/pypi/v/sphinxcontrib-packages.svg
   :target: http://pypi.python.org/pypi/sphinxcontrib-packages
 .. |license| image:: https://img.shields.io/pypi/l/sphinxcontrib-packages.svg

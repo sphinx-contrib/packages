@@ -16,7 +16,7 @@
 """This is a sphinx extension providing some directives to show system information.
 
 Its main purpose is to display a list of tools available on readthedocs:
-http://packages.readthedocs.org
+http://packages.readthedocs.io
 """
 
 import collections
