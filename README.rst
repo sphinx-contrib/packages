@@ -1,7 +1,7 @@
 Description of the `sphinxcontrib-packages` Sphinx Extension
 ============================================================
 
-|sources| |pypi| |documentation| |license|
+|sources| |pypi| |build| |coverage| |documentation| |license|
 
 This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives
 to see what tools are available on the compiling machine. I wrote this because
@@ -58,6 +58,8 @@ The documentation is available on `readthedocs
   :target: http://www.gnu.org/licenses/agpl-3.0.html
 .. |sources| image:: https://img.shields.io/badge/sources-sphinxcontrib--packages-brightgreen.svg
   :target: http://git.framasoft.org/spalax/sphinxcontrib-packages
+.. |coverage| image:: https://git.framasoft.org/spalax/packages/badges/master/coverage.svg
+  :target: https://git.framasoft.org/spalax/packages/builds
 .. |build| image:: https://git.framasoft.org/spalax/packages/badges/master/build.svg
   :target: https://git.framasoft.org/spalax/packages/builds
 
