@@ -468,4 +468,3 @@ def setup(app):
     app.add_directive('packages:python3', Py3Directive)
     app.add_directive('packages:c', CDirective)
     app.add_directive('packages:latex', LatexDirective)
-
