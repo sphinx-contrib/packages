@@ -7,15 +7,13 @@ This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives
 to see what tools are available on the compiling machine. I wrote this because
 I was developping a sphinx extension calling system commands, and I wanted to
 be able to use is on `readthedocs <http://readthedocs.io>`__, but I did not
-know which tools were available there: the `official list of installed tools
-<https://docs.readthedocs.io/en/latest/builds.html#packages-installed-in-the-build-environment>`__
+know which tools were available there: the `official list of installed tools <https://docs.readthedocs.io/en/latest/builds.html#packages-installed-in-the-build-environment>`__
 is pretty scarce…
 
 What's new?
 -----------
 
-See `changelog
-<https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG.md>`_.
+See `changelog <https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG.md>`_.
 
 Install
 -------
@@ -45,8 +43,7 @@ See the end of list for a (quick and dirty) Debian package.
 Documentation
 -------------
 
-The documentation is available on `readthedocs
-<http://packages.readthedocs.io>`_.  You can build it using::
+The documentation is available on `readthedocs <http://packages.readthedocs.io>`_.  You can build it using::
 
   cd doc && make html
 
