@@ -1,3 +1,9 @@
+* sphinxcontrib-packages 0.1.2 (unreleased)
+
+    * Add python3.6 support.
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * sphinxcontrib-packages 0.1.2 (2016-03-11)
 
     * Fix project URL in setup file.
