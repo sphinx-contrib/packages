@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2015-2016
+# Copyright Louis Paternault 2015-2017
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -26,6 +26,7 @@ import os
 import platform
 import re
 import subprocess
+import sys
 
 import pkg_resources
 
@@ -117,6 +118,7 @@ def python_versions():
     for path in iter_paths():
         for binary in glob.glob(os.path.join(path, "python*")):
             binaries.add(binary)
+    binaries.add(sys.executable)
 
     pythonre = re.compile(r".*/python[.0123456789]*$")
     for binary in binaries:
