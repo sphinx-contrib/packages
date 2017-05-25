@@ -42,7 +42,7 @@ setup(
             ],
         include_package_data=True,
         author='Louis Paternault',
-        author_email='spalax+pypi@gresille.org',
+        author_email='spalax+python@gresille.org',
         description='This packages contains the Packages sphinx extension, which provides directives to display packages installed on the host machine',
         url='https://git.framasoft.org/spalax/sphinxcontrib-packages',
         license="AGPLv3 or any later version",

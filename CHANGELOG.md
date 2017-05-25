@@ -2,14 +2,14 @@
 
     * Add python3.6 support.
 
-    -- Louis Paternault <spalax+pypi@gresille.org>
+    -- Louis Paternault <spalax+python@gresille.org>
 
 * sphinxcontrib-packages 0.1.2 (2016-03-11)
 
     * Fix project URL in setup file.
     * Set status from beta to stable.
 
-    -- Louis Paternault <spalax+pypi@gresille.org>
+    -- Louis Paternault <spalax+python@gresille.org>
 
 * sphinxcontrib-packages 0.1.1 (2015-06-13)
 
@@ -20,11 +20,11 @@
     * Python3.5 support
     * Several minor improvement for documentation, tests and setup.
 
-    -- Louis Paternault <spalax+pypi@gresille.org>
+    -- Louis Paternault <spalax+python@gresille.org>
 
 * sphinxcontrib-packages 0.1.0 (2015-04-05)
 
     * Initial release.
     * Implements directives: packages:{platform,python2,python3,bin,c,deb,latex}
 
-    -- Louis Paternault <spalax+pypi@gresille.org>
+    -- Louis Paternault <spalax+python@gresille.org>
