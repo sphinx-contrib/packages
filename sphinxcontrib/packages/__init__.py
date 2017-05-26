@@ -43,8 +43,7 @@ def node_or_str(text):
     """Return argument, converted to a node if necessary."""
     if isinstance(text, str):
         return nodes.paragraph(text=text)
-    else:
-        return text
+    return text
 
 def simple_compound(*items):
     """Return a compound node."""
@@ -242,11 +241,11 @@ def deepdict_factory(depth):
     """
     if depth == 0:
         return list
-    else:
-        def deepdict():
-            """Return a deepdict, less deep than the current one."""
-            return collections.defaultdict(deepdict_factory(depth - 1))
-        return deepdict
+
+    def deepdict():
+        """Return a deepdict, less deep than the current one."""
+        return collections.defaultdict(deepdict_factory(depth - 1))
+    return deepdict
 
 class CmdDirective(Directive):
     """Abstract directive that executes a command, and return its output as array(s).
@@ -434,10 +433,9 @@ class LatexDirective(CmdDirective):
         """
         if file.endswith(".sty"):
             return "package"
-        elif file.endswith(".cls"):
+        if file.endswith(".cls"):
             return "class"
-        else:
-            return False
+        return False
 
     def _find(self, path):
         """Iterator over .sty and .clsfiles in argument.
