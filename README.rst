@@ -1,5 +1,5 @@
-Description of the `sphinxcontrib-packages` Sphinx Extension
-============================================================
+`sphinxcontrib-packages` 📦 Display available tools available on the host machine
+================================================================================
 
 |sources| |pypi| |build| |coverage| |documentation| |license|
 
