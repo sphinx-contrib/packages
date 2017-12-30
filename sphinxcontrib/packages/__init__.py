@@ -31,10 +31,9 @@ import sys
 import pkg_resources
 
 from docutils import nodes
-from docutils.parsers.rst import directives
+from docutils.parsers.rst import directives, Directive
 from docutils.parsers.rst.directives import flag, unchanged
 from docutils.statemachine import StringList
-from sphinx.util.compat import Directive
 from sphinx.util.nodes import nested_parse_with_titles
 
 __version__ = "0.1.2"
