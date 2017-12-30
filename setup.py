@@ -56,8 +56,6 @@ setup(
             "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
             "Operating System :: Unix",
             "Programming Language :: Python :: 3",
-            "Programming Language :: Python :: 3.2",
-            "Programming Language :: Python :: 3.4",
             "Programming Language :: Python :: 3.5",
             "Programming Language :: Python :: 3.6",
             "Topic :: Documentation :: Sphinx",
