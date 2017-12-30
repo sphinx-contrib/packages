@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright Louis Paternault 2015-2016
+# Copyright Louis Paternault 2015-2017
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -26,7 +26,7 @@ import types
 LOGGER = logging.getLogger()
 LOGGER.addHandler(logging.StreamHandler())
 
-__version__ = "0.1.2"
+__version__ = "1.0.0"
 
 VERSION_NAMES = [
     "version",
