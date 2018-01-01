@@ -1,3 +1,9 @@
+* sphinxcontrib-packages 1.0.1 (2017-01-01)
+
+    * Fix wheel.
+
+    -- Louis Paternault <spalax+python@gresille.org>
+
 * sphinxcontrib-packages 1.0.0 (2017-12-30)
 
     * Add python3.6 support.
