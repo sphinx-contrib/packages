@@ -1,4 +1,4 @@
-# Copyright 2015-2016 Louis Paternault
+# Copyright 2015-2017 Louis Paternault
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,7 +35,8 @@ def readme():
 setup(
         name='sphinxcontrib-packages',
         version="1.0.0",
-        packages=find_packages(exclude=["test*"]),
+        packages=find_packages(exclude=["test*"])
+            + ["sphinxcontrib.packages"], # TODO: Remove this line when bug https://github.com/pypa/setuptools/issues/97 is fixed.
         setup_requires=["hgtools"],
         install_requires=[
             "sphinx",
