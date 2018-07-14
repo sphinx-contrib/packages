@@ -1,8 +1,6 @@
 `sphinxcontrib-packages` 📦 Display available tools available on the host machine
 =================================================================================
 
-|sources| |pypi| |build| |coverage| |documentation| |license|
-
     **Note:** It's 2018, and this project is still maintained: I has very few updates, because it *just works*.
 
 This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives
@@ -48,16 +46,3 @@ Documentation
 The documentation is available on `readthedocs <http://packages.readthedocs.io>`_.  You can build it using::
 
   cd doc && make html
-
-.. |documentation| image:: http://readthedocs.org/projects/packages/badge
-  :target: http://packages.readthedocs.io
-.. |pypi| image:: https://img.shields.io/pypi/v/sphinxcontrib-packages.svg
-  :target: http://pypi.python.org/pypi/sphinxcontrib-packages
-.. |license| image:: https://img.shields.io/pypi/l/sphinxcontrib-packages.svg
-  :target: http://www.gnu.org/licenses/agpl-3.0.html
-.. |sources| image:: https://img.shields.io/badge/sources-sphinxcontrib--packages-brightgreen.svg
-  :target: http://git.framasoft.org/spalax/sphinxcontrib-packages
-.. |coverage| image:: https://framagit.org/spalax/sphinxcontrib-packages/badges/master/coverage.svg
-  :target: https://framagit.org/spalax/sphinxcontrib-packages/builds
-.. |build| image:: https://framagit.org/spalax/sphinxcontrib-packages/badges/master/build.svg
-  :target: https://framagit.org/spalax/sphinxcontrib-packages/builds
