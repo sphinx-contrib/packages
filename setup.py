@@ -45,6 +45,11 @@ setup(
     author_email="spalax+python@gresille.org",
     description="This packages contains the Packages sphinx extension, which provides directives to display packages installed on the host machine",
     url="https://git.framasoft.org/spalax/sphinxcontrib-packages",
+    project_urls={
+        "Documentation": "http://packages.readthedocs.io",
+        "Source": "https://framagit.org/spalax/sphinxcontrib-packages",
+        "Tracker": "https://framagit.org/spalax/sphinxcontrib-packages/issues",
+    },
     license="AGPLv3 or any later version",
     test_suite="test.suite",
     keywords="sphinx packages system",
