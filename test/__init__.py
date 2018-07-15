@@ -22,6 +22,7 @@ import unittest
 
 import sphinxcontrib.packages
 
+
 def suite():
     """Return a :class:`TestSuite` object, testing all module :mod:`sphinxcontrib.packages`.
     """
@@ -29,8 +30,11 @@ def suite():
     return test_loader.discover(
         os.path.abspath(os.path.dirname(__file__)),
         pattern="*.py",
-        top_level_dir=os.path.abspath(os.path.join(sphinxcontrib.packages.__path__[0], "..", "..")),
-        )
+        top_level_dir=os.path.abspath(
+            os.path.join(sphinxcontrib.packages.__path__[0], "..", "..")
+        ),
+    )
+
 
 if __name__ == "__main__":
     unittest.TextTestRunner().run(suite())

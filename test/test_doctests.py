@@ -23,15 +23,16 @@ import sys
 
 import sphinxcontrib.packages
 
+
 def load_tests(__loader, tests, __pattern):
     """Load tests (doctests).
     """
     # Loading doctests
     tests.addTests(doctest.DocTestSuite(sphinxcontrib.packages))
     for module_finder, name, __is_pkg in pkgutil.walk_packages(
-            sphinxcontrib.packages.__path__,
-            prefix="{}.".format(sphinxcontrib.packages.__name__),
-        ):
+        sphinxcontrib.packages.__path__,
+        prefix="{}.".format(sphinxcontrib.packages.__name__),
+    ):
         if name in sys.modules:
             module = sys.modules[name]
         else:

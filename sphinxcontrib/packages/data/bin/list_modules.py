@@ -35,22 +35,27 @@ VERSION_NAMES = [
     "__version__",
     "__Version__",
     "__VERSION__",
-    ]
+]
+
 
 def get_version(module):
     """Guess the version of argument, and returns it, as a string."""
-    candidates = [getattr(module, attr) for attr in VERSION_NAMES if hasattr(module, attr)]
+    # pylint: disable=no-else-return
+    candidates = [
+        getattr(module, attr) for attr in VERSION_NAMES if hasattr(module, attr)
+    ]
     while candidates:
         first = candidates.pop()
         if callable(first):
             return str(first())
         elif isinstance(first, types.ModuleType):
-            candidates.extend([
-                getattr(first, attr) for attr in VERSION_NAMES if hasattr(first, attr)
-                ])
+            candidates.extend(
+                [getattr(first, attr) for attr in VERSION_NAMES if hasattr(first, attr)]
+            )
         else:
             return str(first)
     return ""
+
 
 def module_list():
     """Yield the list of modules (with version and path)."""
@@ -66,8 +71,9 @@ def module_list():
         try:
             module = __import__(name)
             yield name, get_version(module), module.__file__
-        except BaseException as error: # pylint: disable=broad-except
+        except BaseException as error:  # pylint: disable=broad-except
             LOGGER.warning("Error while importing {}: {}.".format(name, error))
+
 
 if __name__ == "__main__":
     for package, version, path in module_list():
