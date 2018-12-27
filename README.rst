@@ -1,8 +1,6 @@
 `sphinxcontrib-packages` 📦 Display available tools available on the host machine
 =================================================================================
 
-    **Note:** It's 2018, and this project is still maintained: I has very few updates, because it *just works*.
-
 This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives
 to see what tools are available on the compiling machine. I wrote this because
 I was developping a sphinx extension calling system commands, and I wanted to
