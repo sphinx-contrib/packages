@@ -295,16 +295,15 @@ class CmdDirective(Directive):
             return simple_table(
                 len(self.headers), headers, [items[key] for key in sorted(items.keys())]
             )
-        else:
-            return simple_bulletlist(
-                [
-                    simple_compound(
-                        nodes.paragraph(text=self.section_names(key)),
-                        self._render_deepdict(deepdict[key]),
-                    )
-                    for key in sorted(deepdict)
-                ]
-            )
+        return simple_bulletlist(
+            [
+                simple_compound(
+                    nodes.paragraph(text=self.section_names(key)),
+                    self._render_deepdict(deepdict[key]),
+                )
+                for key in sorted(deepdict)
+            ]
+        )
 
     def run(self):
         try:
