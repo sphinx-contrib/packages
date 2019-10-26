@@ -1,3 +1,11 @@
+* sphinxcontrib-packages 1.1.0 (unreleased)
+
+    * Drop python3.6 support.
+    * Add python3.7 support.
+    * Add python3.8 support.
+
+    -- Louis Paternault <spalax+python@gresille.org>
+
 * sphinxcontrib-packages 1.0.1 (2017-01-01)
 
     * Fix wheel.
