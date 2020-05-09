@@ -1,0 +1,4 @@
+- [ ] Drop python2?
+- [ ] Replace hgtools by setuptools_scm
+- [ ] Replace setup.py by setup.cfg and pyproject.toml
+- [ ] Set `python_requires`
