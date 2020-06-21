@@ -42,7 +42,7 @@ setup(
     install_requires=["sphinx"],
     include_package_data=True,
     author="Louis Paternault",
-    author_email="spalax+python@gresille.org",
+    author_email="spalax@gresille.org",
     description="This packages contains the Packages sphinx extension, which provides directives to display packages installed on the host machine",
     url="https://git.framasoft.org/spalax/sphinxcontrib-packages",
     project_urls={
