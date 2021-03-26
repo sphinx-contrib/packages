@@ -11,7 +11,7 @@ know which tools were available there
 What's new?
 -----------
 
-See `changelog <https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/master/CHANGELOG.md>`_.
+See `changelog <https://git.framasoft.org/spalax/sphinxcontrib-packages/blob/main/CHANGELOG.md>`_.
 
 Install
 -------
