@@ -3,7 +3,7 @@
 
 This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives
 to see what tools are available on the compiling machine. I wrote this because
-I was developping a sphinx extension calling system commands, and I wanted to
+I was developing a sphinx extension calling system commands, and I wanted to
 be able to use is on `readthedocs <http://readthedocs.io>`__, but I did not
 know which tools were available there
 (and the `Dockerfile <https://hub.docker.com/r/readthedocs/build/~/dockerfile>`__ is not precise enough).
