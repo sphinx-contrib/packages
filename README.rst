@@ -1,4 +1,4 @@
-`sphinxcontrib-packages` 📦 Display available tools available on the host machine
+`sphinxcontrib-packages` 📦 Display a list of tools available on the host machine
 =================================================================================
 
 This `sphinx <http://sphinx.pocoo.org/>`__ extension provides some directives

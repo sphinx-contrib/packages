@@ -9,7 +9,7 @@ see what tools are available on the compiling machine. I wrote this because I wa
 
     If your are reading this on `readthedocs <http://readthedocs.io>`__, keep in mind that those lists are not official. It is not guaranteed that those tools will remain available in the future: they only reflects what was available when this documentation was compiled.
 
-    I do not know and I have nothing to do with `readthedocs <http://readthedocs.io>`__, so I do not know how they choose what to install.
+    I do not know and I have nothing to do with the `readthedocs <http://readthedocs.io>`__ team, so I do not know how they choose what to install.
 
 Installed tools
 ---------------
