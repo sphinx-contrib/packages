@@ -1,8 +1,7 @@
 * sphinxcontrib-packages 1.1.0 (unreleased)
 
-    * Drop python3.6 support.
-    * Add python3.7 support.
-    * Add python3.8 support.
+    * Drop python3.5 and python3.6 support.
+    * Add python3.7 and python3.8 support.
 
     -- Louis Paternault <spalax@gresille.org>
 
