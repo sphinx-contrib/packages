@@ -39,7 +39,7 @@ setup(
         "sphinxcontrib.packages"
     ],  # TODO: Remove this line when bug https://github.com/pypa/setuptools/issues/97 is fixed.
     setup_requires=["hgtools"],
-    install_requires=["sphinx"],
+    install_requires=["distro", "sphinx"],
     include_package_data=True,
     author="Louis Paternault",
     author_email="spalax@gresille.org",

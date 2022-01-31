@@ -28,6 +28,7 @@ import re
 import subprocess
 import sys
 
+import distro
 import pkg_resources
 
 from docutils import nodes
@@ -145,7 +146,7 @@ def python_versions():
 
 
 class PlatformDirective(Directive):
-    """Print platform information (processors, architecture, etc.)"""
+    """Print platform information (processors, architecture, etc.). Assume to be GNU/Linux."""
 
     has_content = False
 
@@ -162,11 +163,9 @@ class PlatformDirective(Directive):
         ]:
             yield [attr.replace("_", " ").capitalize(), str(getattr(platform, attr)())]
 
-        for attr in ["architecture", "linux_distribution"]:
-            yield [
-                attr.replace("_", " ").capitalize(),
-                " ".join([str(item) for item in getattr(platform, attr)()]),
-            ]
+        yield ["Distribution id", distro.id()]
+        yield ["Distribution name", distro.name()]
+        yield ["Distribution version", distro.version(pretty=True)]
 
     def run(self):
         return [simple_table(2, [], self.body())]
