@@ -1,6 +1,6 @@
 #!/usr/bin python
 
-# Copyright 2015 Louis Paternault
+# Copyright 2015-2022 Louis Paternault
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,13 +25,12 @@ import sphinxcontrib.packages
 
 
 def load_tests(__loader, tests, __pattern):
-    """Load tests (doctests).
-    """
+    """Load tests (doctests)."""
     # Loading doctests
     tests.addTests(doctest.DocTestSuite(sphinxcontrib.packages))
     for module_finder, name, __is_pkg in pkgutil.walk_packages(
         sphinxcontrib.packages.__path__,
-        prefix="{}.".format(sphinxcontrib.packages.__name__),
+        prefix=f"{sphinxcontrib.packages.__name__}.",
     ):
         if name in sys.modules:
             module = sys.modules[name]

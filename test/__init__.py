@@ -24,8 +24,7 @@ import sphinxcontrib.packages
 
 
 def suite():
-    """Return a :class:`TestSuite` object, testing all module :mod:`sphinxcontrib.packages`.
-    """
+    """Return a :class:`TestSuite` object, testing all module :mod:`sphinxcontrib.packages`."""
     test_loader = unittest.defaultTestLoader
     return test_loader.discover(
         os.path.abspath(os.path.dirname(__file__)),

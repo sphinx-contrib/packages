@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2015-2017
+# Copyright Louis Paternault 2015-2022
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -244,8 +244,7 @@ def deepdict_factory(depth):
 
 
 class CmdDirective(Directive):
-    """Abstract directive that executes a command, and return its output as array(s).
-    """
+    """Abstract directive that executes a command, and return its output as array(s)."""
 
     command = []
     regexp = "(?P<line>.*)"
@@ -255,8 +254,7 @@ class CmdDirective(Directive):
     show_headers = True
 
     def section_names(self, name):  # pylint: disable=no-self-use
-        """Return the displayed name corresponding to section ``name``.
-        """
+        """Return the displayed name corresponding to section ``name``."""
         return name
 
     def filter(self, match):  # pylint: disable=no-self-use
@@ -285,7 +283,7 @@ class CmdDirective(Directive):
         - if it is a list, render it as a table.
         """
         if isinstance(deepdict, list):
-            items = dict()
+            items = {}
             for item in deepdict:
                 items[item[self.sortkey]] = [item[key] for key in self.headers]
             if self.show_headers:
@@ -307,19 +305,18 @@ class CmdDirective(Directive):
 
     def run(self):
         try:
-            process = subprocess.Popen(
+            with subprocess.Popen(
                 self.command,
                 stdin=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,
-            )
-            deepdict = deepdict_factory(len(self.sections))()
-            for match in self._iter_match(process.stdout):
-                subdict = deepdict
-                for section in self.sections:
-                    subdict = subdict[match[section]]
-                subdict.append(match)
-            process.wait()
+            ) as process:
+                deepdict = deepdict_factory(len(self.sections))()
+                for match in self._iter_match(process.stdout):
+                    subdict = deepdict
+                    for section in self.sections:
+                        subdict = subdict[match[section]]
+                    subdict.append(match)
         except FileNotFoundError as exception:
             error = nodes.error()
             error.append(nodes.paragraph(text=str(exception)))
@@ -333,7 +330,7 @@ class DebDirective(CmdDirective):
 
     regexp = "ii *\t" + r"\t".join(
         [
-            r"(?P<{}>[^\t]*)".format(key)
+            rf"(?P<{key}>[^\t]*)"
             for key in ["section", "package", "version", "homepage", "summary"]
         ]
     )
@@ -366,7 +363,7 @@ class PyDirective(CmdDirective):
     """Abstract class to display available python modules."""
 
     regexp = r"\t".join(
-        [r"(?P<{}>[^\t]*)".format(key) for key in ["package", "version", "path"]]
+        [rf"(?P<{key}>[^\t]*)" for key in ["package", "version", "path"]]
     )
     headers = collections.OrderedDict(
         [("package", "Package name"), ("version", "Version")]
