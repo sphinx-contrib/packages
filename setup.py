@@ -34,10 +34,7 @@ def readme():
 setup(
     name="sphinxcontrib-packages",
     version="1.0.1",
-    packages=find_packages(exclude=["test*"])
-    + [
-        "sphinxcontrib.packages"
-    ],  # TODO: Remove this line when bug https://github.com/pypa/setuptools/issues/97 is fixed.
+    packages=find_packages(exclude=["test*"]),
     setup_requires=["hgtools"],
     install_requires=["distro", "sphinx"],
     include_package_data=True,
