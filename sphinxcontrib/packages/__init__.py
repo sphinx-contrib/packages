@@ -30,9 +30,8 @@ import sys
 
 import distro
 import pkg_resources
-
 from docutils import nodes
-from docutils.parsers.rst import directives, Directive
+from docutils.parsers.rst import Directive, directives
 from docutils.parsers.rst.directives import flag, unchanged
 from docutils.statemachine import StringList
 from sphinx.util.nodes import nested_parse_with_titles
