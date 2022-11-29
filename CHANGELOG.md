@@ -1,4 +1,4 @@
-* sphinxcontrib-packages 1.1.0 (unreleased)
+* sphinxcontrib-packages 1.1.0 (2022-11-29)
 
     * Drop python3.5 and python3.6 support.
     * Add python3.7 to python3.11 support.

@@ -36,7 +36,7 @@ from docutils.parsers.rst.directives import flag, unchanged
 from docutils.statemachine import StringList
 from sphinx.util.nodes import nested_parse_with_titles
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 
 
 def node_or_str(text):

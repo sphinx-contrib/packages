@@ -48,7 +48,7 @@ root_doc = "index"
 
 # General information about the project.
 project = "Packages"
-copyright = "2014-2017, Louis Paternault"
+copyright = "2014-2022, Louis Paternault"
 author = "Louis Paternault"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -56,7 +56,7 @@ author = "Louis Paternault"
 # built documents.
 #
 # The short X.Y version.
-version = "1.0.1"
+version = "1.1.0"
 # The full version, including alpha/beta/rc tags.
 release = version
 
