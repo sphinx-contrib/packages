@@ -251,11 +251,11 @@ class CmdDirective(Directive):
     sortkey = None
     show_headers = True
 
-    def section_names(self, name):  # pylint: disable=no-self-use
+    def section_names(self, name):
         """Return the displayed name corresponding to section ``name``."""
         return name
 
-    def filter(self, match):  # pylint: disable=no-self-use
+    def filter(self, match):
         """Perform some post-processing on matched lines, and iterate over result.
 
         Iterate over resulting objects. In particular, it can iterate zero
