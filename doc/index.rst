@@ -11,6 +11,10 @@ see what tools are available on the compiling machine. I wrote this because I wa
 
     I do not know and I have nothing to do with the `readthedocs <http://readthedocs.io>`__ team, so I do not know how they choose what to install.
 
+.. warning::
+
+   This package was written before `readthedocs <http://readthedocs.io>`__ started `using Docker <https://docs.readthedocs.io/en/stable/config-file/v2.html>`__. Since you can run commands before compilation and install Debian packages, I am not sure how relevant this package is now.
+
 Installed tools
 ---------------
 
