@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2015-2022
+# Copyright Louis Paternault 2015-2023
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -36,7 +36,7 @@ from docutils.parsers.rst.directives import flag, unchanged
 from docutils.statemachine import StringList
 from sphinx.util.nodes import nested_parse_with_titles
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 
 def node_or_str(text):

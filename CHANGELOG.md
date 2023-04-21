@@ -1,4 +1,4 @@
-* sphinxcontrib-packages 1.1.1 (unreleased)
+* sphinxcontrib-packages 1.1.1 (2023-04-21)
 
     * [setup] Replace setup.py with setup.cfg
     * [setup] Python package was not included in packages (closes #9).
