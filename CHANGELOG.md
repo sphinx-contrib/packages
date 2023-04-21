@@ -2,6 +2,7 @@
 
     * [setup] Replace setup.py with setup.cfg
     * [setup] Python package was not included in packages (closes #9).
+    * Python3.12 support.
 
     -- Louis Paternault <spalax@gresille.org>
 
