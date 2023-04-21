@@ -1,3 +1,10 @@
+* sphinxcontrib-packages 1.1.1 (unreleased)
+
+    * [setup] Replace setup.py with setup.cfg
+    * [setup] Python package was not included in packages (closes #9).
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * sphinxcontrib-packages 1.1.0 (2022-11-29)
 
     * Drop python3.5 and python3.6 support.
