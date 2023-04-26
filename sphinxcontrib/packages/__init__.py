@@ -37,7 +37,7 @@ from docutils.statemachine import StringList
 from sphinx.domains import Domain
 from sphinx.util.nodes import nested_parse_with_titles
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 
 def node_or_str(text):

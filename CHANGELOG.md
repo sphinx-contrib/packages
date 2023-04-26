@@ -1,4 +1,4 @@
-* sphinxcontrib-packages 1.1.2 (unreleased)
+* sphinxcontrib-packages 1.1.2 (2023-04-26)
 
     * Create a Sphinx domain to remove a warning (closes #10).
 
