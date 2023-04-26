@@ -34,6 +34,7 @@ from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 from docutils.parsers.rst.directives import flag, unchanged
 from docutils.statemachine import StringList
+from sphinx.domains import Domain
 from sphinx.util.nodes import nested_parse_with_titles
 
 __version__ = "1.1.1"
@@ -453,14 +454,24 @@ class LatexDirective(CmdDirective):
             ]
 
 
+class PackagesDomain(Domain):
+    """Gather directives."""
+
+    name = "packages"
+    label = "Sphinxcontrib-packages"
+    directives = {
+        "platform": PlatformDirective,
+        "pyversions": PythonVersionsDirective,
+        "bin": BinDirective,
+        "deb": DebDirective,
+        "python": PyDirective,
+        "python2": Py2Directive,
+        "python3": Py3Directive,
+        "c": CDirective,
+        "latex": LatexDirective,
+    }
+
+
 def setup(app):
     """Register directives."""
-    app.add_directive("packages:platform", PlatformDirective)
-    app.add_directive("packages:pyversions", PythonVersionsDirective)
-    app.add_directive("packages:bin", BinDirective)
-    app.add_directive("packages:deb", DebDirective)
-    app.add_directive("packages:python", PyDirective)
-    app.add_directive("packages:python2", Py2Directive)
-    app.add_directive("packages:python3", Py3Directive)
-    app.add_directive("packages:c", CDirective)
-    app.add_directive("packages:latex", LatexDirective)
+    app.add_domain(PackagesDomain)

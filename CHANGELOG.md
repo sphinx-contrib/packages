@@ -1,3 +1,9 @@
+* sphinxcontrib-packages 1.1.2 (unreleased)
+
+    * Create a Sphinx domain to remove a warning (closes #10).
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * sphinxcontrib-packages 1.1.1 (2023-04-21)
 
     * [setup] Replace setup.py with setup.cfg
