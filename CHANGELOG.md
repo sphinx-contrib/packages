@@ -1,3 +1,9 @@
+* sphinxcontrib-packages 1.2.0 (unreleased)
+
+    * Add Python3.13 support.
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * sphinxcontrib-packages 1.1.2 (2023-04-26)
 
     * Create a Sphinx domain to remove a warning (closes #10).
