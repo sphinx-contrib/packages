@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2015-2023
+# Copyright Louis Paternault 2015-2024
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -137,7 +137,7 @@ def python_versions():
                         [binary, "--version"],
                         stdin=subprocess.DEVNULL,
                         stderr=subprocess.STDOUT,
-                        universal_newlines=True,
+                        text=True,
                     ).strip(),
                 ]
             except subprocess.CalledProcessError:
@@ -473,6 +473,8 @@ class LatexDirective(CmdDirective):
 
 class PackagesDomain(Domain):
     """Gather directives."""
+
+    # pylint: disable=abstract-method
 
     name = "packages"
     label = "Sphinxcontrib-packages"

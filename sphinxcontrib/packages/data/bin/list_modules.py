@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright Louis Paternault 2015-2023
+# Copyright Louis Paternault 2015-2024
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -74,9 +74,9 @@ def module_list():
             module = __import__(name)
             yield name, get_version(module), module.__file__
         except BaseException as error:  # pylint: disable=broad-except
-            LOGGER.warning("Error while importing {}: {}.".format(name, error))
+            LOGGER.warning("Error while importing %s: %s.", name, error)
 
 
 if __name__ == "__main__":
     for package, version, path in module_list():
-        print("{}\t{}\t{}".format(package, version, path))
+        print(f"{package}\t{version}\t{path}")
