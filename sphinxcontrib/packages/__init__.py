@@ -21,6 +21,7 @@ http://packages.readthedocs.io
 
 import collections
 import glob
+import importlib.resources
 import operator
 import os
 import platform
@@ -381,29 +382,10 @@ class PyDirective(CmdDirective):
         if "bin" not in self.options:
             self.options["bin"] = self.python
 
-        # Module importlib.resources only appeared in python3.7.
-        # We try using it, and switch to deprecated pkg_resources if the import fails.
-        try:
-            # pylint: disable=import-outside-toplevel
-            import importlib.resources
-
-            return [
-                self.options["bin"],
-                importlib.resources.files(__name__)
-                / "data"
-                / "bin"
-                / "list_modules.py",
-            ]
-        except ImportError:
-            # pylint: disable=import-outside-toplevel
-            import pkg_resources
-
-            return [
-                self.options["bin"],
-                pkg_resources.resource_filename(
-                    __name__, os.path.join("data", "bin", "list_modules.py")
-                ),
-            ]
+        return [
+            self.options["bin"],
+            importlib.resources.files(__name__) / "data" / "bin" / "list_modules.py",
+        ]
 
 
 class Py3Directive(PyDirective):

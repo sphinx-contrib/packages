@@ -1,6 +1,7 @@
 * sphinxcontrib-packages 1.2.0 (unreleased)
 
     * Add Python3.13 support.
+    * Drop Python3.7 support.
 
     -- Louis Paternault <spalax@gresille.org>
 
