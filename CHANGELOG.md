@@ -1,3 +1,9 @@
+* sphinxcontrib-packages 1.2.1 (unreleased)
+
+    * Add python3.14 support.
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * sphinxcontrib-packages 1.2.0 (2024-12-27)
 
     * Add Python3.13 support.
