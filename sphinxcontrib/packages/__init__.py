@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2015-2024
+# Copyright Louis Paternault 2015-2025
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -37,7 +37,7 @@ from docutils.statemachine import StringList
 from sphinx.domains import Domain
 from sphinx.util.nodes import nested_parse_with_titles
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 
 def node_or_str(text):
