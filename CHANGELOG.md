@@ -1,4 +1,4 @@
-* sphinxcontrib-packages 1.3.0 (unreleased)
+* sphinxcontrib-packages 1.3.0 (2026-10-26)
 
     * Add python3.15 and python3.16 support.
 
